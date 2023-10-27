@@ -1,0 +1,74 @@
+<!--
+ * Title: sign-in.component.html
+ * Author: Jennifer Hoitenga
+ * Date: 10/26/2023
+-->
+<!-- Container with background image for the login page. -->
+<div class="background-image">
+  <!-- Container for the login form. -->
+  <div class="login-container">
+    <!-- Card for the login form. -->
+    <div class="login-card">
+      <!-- Icon container with a user icon. -->
+      <div class="icon-container">
+        <i class="fas fa-user fa-3x"></i>
+      </div>
+      <!-- Title for the login card. -->
+      <h1 class="login-title">Employee Sign In</h1>
+
+      <!-- Form for user sign-in. -->
+      <form
+        [formGroup]="signInForm"
+        (ngSubmit)="onSubmit(); signInForm.reset()"
+      >
+        <mat-form-field fxFlex appearance="fill">
+          <mat-label>Employee ID</mat-label>
+          <input
+            matInput
+            type="text"
+            class="login-field"
+            name="empId"
+            id="empId"
+            formControlName="empId"
+            placeholder="Employee ID"
+          />
+
+          <!-- Validation Error Message for non-numeric input. -->
+          <div class="msg-error" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </div>
+
+          <!-- Validation Error Message for non-numeric input. -->
+          <div
+            *ngIf="form['empId'].errors?.['pattern']&& form['empId'].touched"
+            class="msg-error"
+          >
+            <i class="material-icons error-icon">error_outline</i>
+
+            <span class="error-text"
+              >The Employee ID should be a numeric value.</span
+            >
+          </div>
+
+          <!-- Validation Error Message for empty input. -->
+          <div
+            *ngIf="form['empId'].errors?.['required']&& form['empId'].touched"
+            class="msg-error"
+          >
+            <i class="material-icons error-icon">error_outline</i>
+
+            <span class="error-text">The Employee ID is required.</span>
+          </div>
+        </mat-form-field>
+
+        <!-- Form submission button. -->
+        <button mat-raised-button type="submit" [disabled]="!signInForm.valid">
+          Sign In
+        </button>
+      </form>
+
+      <!-- Navigate back to the homepage -->
+      <a href="/" class="back-link">Go Back</a>
+    </div>
+  </div>
+</div>

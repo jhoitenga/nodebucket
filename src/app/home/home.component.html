@@ -1,11 +1,92 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <h1>Home Component Works! <span class="material-icons">thumb_up</span></h1>
+<!--
+ * Title: home.component.html
+ * Author: Jennifer Hoitenga
+ * Date: 10/26/2023
+-->
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row">
+      <!-- Left Column - Text and Sign In Button -->
+      <div class="col-md-6">
+        <div>
+          <div class="text-label">Welcome to Nodebucket</div>
+          <div class="text-hero-regular">
+            Your all-in-one task tracking solution!
+          </div>
+          <!-- Sign In Button -->
+          <div class="cta">
+            <a
+              routerLink="/security/sign-in"
+              class="btn btn-mod btn-border btn-circle btn-large"
+            >
+              Sign In <i class="bi bi-box-arrow-in-right signIcon"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Image -->
+      <div class="col-md-6">
+        <img src="assets/task-list.jpg" alt="Task List" class="full-img" />
+      </div>
     </div>
   </div>
+</section>
 
-  <a routerLink="/security">Test Security Module</a>
-</div>
-
-
+<!-- Features Icons Section -->
+<section class="features-icons text-center">
+  <div class="container">
+    <div class="row">
+      <!-- Feature 1 - Effortless Task Management -->
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-6 mb-lg-0 mb-lg-3">
+          <div
+            class="features-icons-icon d-flex justify-content-center align-items-center"
+          >
+            <i class="bi bi-file-text"></i>
+          </div>
+          <h3 class="about-blue">Effortless Task Management</h3>
+          <p class="lead mb-0 feature">
+            Effortlessly manage your tasks Nodebucket's Intuitive tools. Stay in
+            control of your projects, set priorities and track progress
+            seamlessly.
+          </p>
+        </div>
+      </div>
+      <!-- Feature 2 - On-the-Go Mobile Accessibility -->
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-6 mb-lg-0 mb-lg-3">
+          <div
+            class="features-icons-icon d-flex justify-content-center align-items-center"
+          >
+            <i class="bi bi-phone"></i>
+          </div>
+          <h3 class="about-blue">On-the-Go Mobile Accessibility</h3>
+          <p class="lead mb-0 feature">
+            Access Nodebucket anytime, anywhere with our mobile-friendly
+            platform. Stay productive on the move, so you never miss a beat in
+            your task management.
+          </p>
+        </div>
+      </div>
+      <!-- Feature 3 - An Intuitive User Interface -->
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+          <div
+            class="features-icons-icon d-flex justify-content-center align-items-center"
+          >
+            <i class="bi bi-lightbulb"></i>
+          </div>
+          <h3 class="about-blue">An Intuitive User Interface</h3>
+          <p class="lead mb-0 feature">
+            Enjoy the simplicity of Nodebucket's user-friendly interface.
+            Navigate your tasks with ease, making project management a breeze
+            for everyone.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

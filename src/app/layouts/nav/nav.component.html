@@ -1,1 +1,46 @@
-<nav></nav>
+<!--
+ * Title: nav.component.html
+ * Author: Jennifer Hoitenga
+ * Date: 10/26/2023
+-->
+
+<!-- Navigation bar with Bootstrap styling for responsiveness. -->
+<nav class="navbar navbar-expand-lg">
+  <!-- Brand/logo with a link to the home page. -->
+  <a class="navbar-brand" href="/">
+    <!-- Brand text for the navigation bar. -->
+    <img src="assets/logo.png" alt="Nodebucket Logo" width="70" height="80" />
+  </a>
+  <span class="navbar-brand">Nodebucket</span>
+
+  <!-- Button to toggle navigation links for smaller screens. -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarResponsive"
+    aria-controls="navbarResponsive"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navigation Links -->
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/home">Home</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link">About</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link">Contact</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/security/sign-in">Sign In</a>
+      </li>
+    </ul>
+  </div>
+</nav>

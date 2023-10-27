@@ -1,0 +1,39 @@
+/*
+ * Title: nav.component.css
+ * Author: Jennifer Hoitenga
+ * Date: 10/26/2023
+ */
+
+.navbar-brand {
+  color: #946b2d;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.navbar {
+  background-color: white;
+  color: #946b2d;
+  padding: 15px 20px 10px 20px;
+  font-size: 24px;
+}
+
+.nav-link {
+  color: #946b2d;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #bebebe;
+}
+
+.navbar-brand:hover {
+  color: #946b2d;
+}
+
+.navbar-toggler {
+  color: #946b2d;
+}
+
+.navbar-toggler .navbar-toggler-icon {
+  cursor: pointer;
+}

@@ -1,0 +1,131 @@
+/*
+ * Title: sign-in.component.css
+ * Author: Jennifer Hoitenga
+ * Date: 10/26/2023
+ */
+
+.background-image {
+  height: 100vh;
+  position: relative;
+}
+
+.background-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-image: url("../../../assets/signin.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 0.5;
+  height: 100%;
+}
+
+.login-card {
+  width: 350px;
+  margin: 80px auto 0;
+  padding: 20px;
+  border-radius: 7px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  position: relative;
+}
+
+.icon-container {
+  width: 90px;
+  height: 90px;
+  background-color: #222f5b;
+  border-radius: 50%;
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-title {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 20px 0;
+  color: #222f5b;
+}
+
+.login-field {
+  padding: 15px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.fas.fa-user {
+  color: white;
+}
+
+.login-container,
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.back-link {
+  margin-top: 20px;
+  text-decoration: underline;
+  color: #222f5b;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.back-link:hover {
+  color: #ababab;
+}
+
+.msg-error {
+  margin: 5px 0;
+  padding: 10px;
+  color: #d8000c;
+  background-color: #ffd2d2;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.error-text {
+  margin-bottom: auto;
+}
+
+.error-icon {
+  font-size: 25px;
+  justify-content: flex-end;
+  margin-right: 2px;
+}
+
+button[mat-raised-button] {
+  display: block;
+  background-color: #946b2d;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+  padding: 14px;
+  width: 92%;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 0;
+  text-align: center;
+  margin: 0 auto 25px auto;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #222f5b;
+}

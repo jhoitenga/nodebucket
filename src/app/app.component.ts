@@ -1,7 +1,8 @@
 /**
  * Title: app.component.ts
  * Author: Professor Krasso
- * Date: 8/5/23
+ * Modified By: Jennifer Hoitenga
+ * Date: 10/26/2023
  */
 
 // imports statements
@@ -13,7 +14,8 @@ import { Component } from '@angular/core';
     <!-- This router-outlet displays the content of the BaseLayout or AuthLayout components -->
     <router-outlet></router-outlet>
   `,
-  styles: []
+  styles: [],
 })
 export class AppComponent {
+  title = 'Nodebucket';
 }

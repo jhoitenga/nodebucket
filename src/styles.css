@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+/* Importing the theme stylesheet */
+@import "custom-theme.scss";
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap");
+
+body {
+  min-height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  background-color: #222f5b;
+  margin-top: 10px;
+  width: 100%;
+  flex-shrink: 0;
+}
