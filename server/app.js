@@ -3,6 +3,11 @@
  * Author: Professor Krasso
  * Modified by: Jennifer Hoitenga
  * Date: 10/26/2023
+ * Sources:
+ * Nodebucket Starter Project: https://github.com/buwebdev/web-450/tree/master/starter-projects/nodebucket
+ * CORS & Cookies: https://livebook.manning.com/book/cors-in-action/chapter-5/29
+ * Previous repositories from my personal GitHub: https://github.com/jhoitenga?tab=repositories
+ * Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
  */
 "use strict";
 
