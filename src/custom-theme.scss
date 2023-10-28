@@ -3,10 +3,10 @@
 @include mat.core();
 
 $nodebucket-primary: mat.define-palette(mat.$blue-palette, 900);
-$nodebucket-accent: mat.define-palette(mat.$orange-palette, A200);
+$nodebucket-accent: mat.define-palette(mat.$gray-palette, 100);
 $nodebucket-warn: mat.define-palette(mat.$red-palette);
 
-$nodebucket-theme: mat.define-dark-theme(
+$nodebucket-theme: mat.define-light-theme(
   (
     color: (
       primary: $nodebucket-primary,

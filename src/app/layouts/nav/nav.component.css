@@ -8,6 +8,10 @@
  * Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
  */
 
+.navbar-nav {
+  margin-left: auto;
+}
+
 .navbar-brand {
   color: #946b2d;
   font-size: 28px;
@@ -27,11 +31,7 @@
 }
 
 .nav-link:hover {
-  color: #bebebe;
-}
-
-.navbar-brand:hover {
-  color: #946b2d;
+  color: #878787;
 }
 
 .navbar-toggler {
@@ -42,9 +42,13 @@
   cursor: pointer;
 }
 
+.active .nav-link {
+  color: #222f5b !important;
+}
+
 .btn-mod.btn-large {
   height: auto;
-  padding: 6px 10px;
+  padding: 2px 6px;
   font-size: 15px;
 }
 
@@ -86,5 +90,5 @@ a.btn-mod {
 .btn-mod.btn-border:focus {
   color: #222f5b;
   border-color: #222f5b;
-  background: #878787;
+  background: #bebebe;
 }

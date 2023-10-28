@@ -14,3 +14,16 @@ footer {
   background-color: #222f5b;
   flex-shrink: 0;
 }
+
+.mat-mdc-snack-bar-container {
+  --mat-mdc-snack-bar-button-color: #ffffff;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+
+  &.app-notification-error {
+    --mdc-snackbar-container-color: #f23a2f;
+  }
+
+  &.app-notification-success {
+    --mdc-snackbar-container-color: #222f5b;
+  }
+}

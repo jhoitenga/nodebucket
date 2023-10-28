@@ -34,6 +34,7 @@ export class NavComponent implements OnInit {
     this.snackBar.open(finalMessage, action, {
       duration: duration,
       verticalPosition: 'top', // To display snackbar at the top of the screen
+      panelClass: 'app-notification-success',
     });
   }
 
