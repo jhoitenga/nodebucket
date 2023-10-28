@@ -16,6 +16,8 @@ import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component
 import { HomeComponent } from './home/home.component';
 import { TaskManagementComponent } from './task-management/task-management.component';
 import { SignInGuard } from './sign-in.guard';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 // routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
@@ -32,6 +34,16 @@ const routes: Routes = [
         path: 'home', // Child route for the home page.
         component: HomeComponent,
         title: 'Nodebucket: Home',
+      },
+      {
+        path: 'about', // Child route for the about page.
+        component: AboutComponent,
+        title: 'Nodebucket: About',
+      },
+      {
+        path: 'contact', // Child route for the contact page.
+        component: ContactComponent,
+        title: 'Nodebucket: Contact',
       },
       {
         path: 'task-management', // Child route for task management.

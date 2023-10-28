@@ -18,6 +18,7 @@ import { BaseLayoutComponent } from './layouts/base-layout/base-layout.component
 import { NavComponent } from './layouts/nav/nav.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +26,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,6 +33,9 @@ import { TaskManagementComponent } from './task-management/task-management.compo
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -42,11 +45,14 @@ import { HttpClientModule } from '@angular/common/http';
     NavComponent,
     FooterComponent,
     TaskManagementComponent,
+    AboutComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
+    MatInputModule,
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
@@ -54,13 +60,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule,
     MatSelectModule,
     BrowserAnimationsModule,
     MatIconModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    MatSnackBarModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

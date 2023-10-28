@@ -28,59 +28,55 @@
       <!-- Title for the login card. -->
       <h1 class="login-title">Employee Sign In</h1>
 
-      <!-- Form for user sign-in. -->
+      <!-- Form for user sign-in -->
       <form
         [formGroup]="signInForm"
         (ngSubmit)="onSubmit(); signInForm.reset()"
       >
-        <mat-form-field fxFlex appearance="fill">
-          <mat-label>Employee ID</mat-label>
+        <!-- Employee ID Field -->
+        <div class="form-floating mb-3">
           <input
-            matInput
             type="text"
-            class="login-field"
-            name="empId"
+            class="form-control"
             id="empId"
-            formControlName="empId"
             placeholder="Employee ID"
+            formControlName="empId"
           />
+          <label for="empId">Employee ID</label>
+        </div>
 
-          <!-- Validation Error Message for non-numeric input. -->
-          <div class="msg-error" *ngIf="errorMessage">
-            {{ errorMessage }}
+        <!-- Validation Error Messages for outside of range -->
+        <div class="alert alert-danger" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Validation Error Message for empty input. -->
+        <div
+          *ngIf="form['empId'].errors && form['empId'].touched"
+          class="alert alert-danger"
+        >
+          <div *ngIf="form['empId'].errors?.['required']">
+            The Employee ID is required.
           </div>
 
           <!-- Validation Error Message for non-numeric input. -->
-          <div
-            *ngIf="form['empId'].errors?.['pattern']&& form['empId'].touched"
-            class="msg-error"
-          >
-            <i class="material-icons error-icon">error_outline</i>
-
-            <span class="error-text"
-              >The Employee ID should be a numeric value.</span
-            >
+          <div *ngIf="form['empId'].errors?.['pattern']">
+            The Employee ID should be a numeric value.
           </div>
+        </div>
 
-          <!-- Validation Error Message for empty input. -->
-          <div
-            *ngIf="form['empId'].errors?.['required']&& form['empId'].touched"
-            class="msg-error"
-          >
-            <i class="material-icons error-icon">error_outline</i>
-
-            <span class="error-text">The Employee ID is required.</span>
-          </div>
-        </mat-form-field>
-
-        <!-- Form submission button. -->
-        <button mat-raised-button type="submit" [disabled]="!signInForm.valid">
+        <!-- Form submission button -->
+        <button
+          class="btn btn-mod btn-border btn-circle btn-large"
+          type="submit"
+          [disabled]="!signInForm.valid"
+        >
           Sign In
         </button>
       </form>
 
       <!-- Navigate back to the homepage -->
-      <a href="/" class="back-link">Go Back</a>
+      <a href="/" class="d-block mt-3 back-link">Go Back</a>
     </div>
   </div>
 </div>

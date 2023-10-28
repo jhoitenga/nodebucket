@@ -6,6 +6,7 @@
  * Nodebucket Starter Project: https://github.com/buwebdev/web-450/tree/master/starter-projects/nodebucket
  * Previous repositories from my personal GitHub: https://github.com/jhoitenga?tab=repositories
  * Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
+ * Angular Snackbar: https://material.angular.io/components/snack-bar/overview
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -18,6 +19,7 @@ import {
 } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { SignInService } from 'src/app/sign-in.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-in',
@@ -33,8 +35,24 @@ export class SignInComponent implements OnInit {
     private router: Router,
     private cookieService: CookieService,
     private fb: FormBuilder,
-    private signInService: SignInService
+    private signInService: SignInService,
+    private snackBar: MatSnackBar
   ) {}
+
+  // Function to display a snackbar.
+  showSnackBar(
+    message: string,
+    action: string,
+    duration: number,
+    dynamicContent: string = '',
+    contentEnd: string = ''
+  ) {
+    const finalMessage = `${message}${dynamicContent}${contentEnd}`; // Concatenate the message with the dynamic content
+    this.snackBar.open(finalMessage, action, {
+      duration: duration,
+      verticalPosition: 'top', // To display snackbar at the top of the screen
+    });
+  }
 
   ngOnInit(): void {
     // Initialize the sign-in form with validation rules
@@ -63,6 +81,7 @@ export class SignInComponent implements OnInit {
     if (this.signInService.validate(employeeId)) {
       this.signInService.getEmployeeName(employeeId).subscribe({
         next: (res) => {
+          this.showSnackBar('Welcome, ', 'Close', 5000, res.firstName, '!'); // Snackbar to confirm successful login
           this.cookieService.set('session_user', employeeId.toString(), 1);
           this.cookieService.set(
             'fullName',

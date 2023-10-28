@@ -38,14 +38,30 @@
         <a class="nav-link" routerLink="/home">Home</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link">About</a>
+        <a class="nav-link" routerLink="/about">About</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link">Contact</a>
+        <a class="nav-link" routerLink="/contact">Contact</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+
+      <!-- Tasks link, visible only when the user is logged in -->
+      <li *ngIf="isLoggedIn()" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/task-management">Tasks</a>
+      </li>
+
+      <!-- Sign In link, visible only when the user is not logged in -->
+      <li *ngIf="!isLoggedIn()" class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/security/sign-in">Sign In</a>
       </li>
+
+      <!-- Sign Out button, visible only when the user is logged in -->
+      <button
+        class="btn btn-mod btn-border btn-circle btn-large"
+        *ngIf="isLoggedIn()"
+        (click)="signOut()"
+      >
+        Sign Out
+      </button>
     </ul>
   </div>
 </nav>
