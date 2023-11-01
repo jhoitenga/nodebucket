@@ -47,7 +47,8 @@ const options = {
     info: {
       title: "Nodebucket RESTful APIs",
       version: "1.0.0",
-      description: "API for Nodebucket",
+      description:
+        "Nodebucket OpenAPI Documentation: Nodebucket empowers you to efficiently oversee your tasks, ensuring you maintain command over your projects, establish priorities, and monitor progress with ease.",
     },
   },
   apis: ["./server/routes/employee-routes.js"], // Specify the API routes to document.
@@ -59,18 +60,18 @@ const app = express();
 // Enable Cross-Origin Resource Sharing for the app.
 app.use(cors());
 
+// Configure the app
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "../dist/nodebucket")));
+app.use("/", express.static(path.join(__dirname, "../dist/nodebucket")));
+
 // Generate OpenAPI documentation using Swagger and serve it at "/api-docs".
 const openapiSpecification = swaggerJsdoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
 // Use the employee API routes at "/api".
 app.use("/api", employeeAPI);
-
-// Configure the app
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "../dist/nodebucket")));
-app.use("/", express.static(path.join(__dirname, "../dist/nodebucket")));
 
 // error handler for 404 errors
 app.use(function (req, res, next) {

@@ -1,5 +1,5 @@
 /*
- * Title: contact.component.scss
+ * Title: task.ts
  * Author: Jennifer Hoitenga
  * Date: 11/1/2023
  * Sources:
@@ -8,21 +8,7 @@
  * Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
  */
 
-.contact-blue {
-  color: #222f5b;
-}
-.contact-icon {
-  color: #946b2d;
-  font-size: 3rem;
-  padding-top: 10px;
-}
-
-.contact-info {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #878787;
-}
-
-.contact-message {
-  padding: 10px;
+export interface ITask {
+  taskId?: number; // Task ID is optional when creating a new task
+  taskDescription: string;
 }

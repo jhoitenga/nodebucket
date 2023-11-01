@@ -7,3 +7,100 @@
  * Previous repositories from my personal GitHub: https://github.com/jhoitenga?tab=repositories
  * Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
  */
+
+.task-heading {
+  text-align: center;
+  background-color: #222f5b;
+  color: white;
+  margin-top: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-size: calc(0.6rem + 0.9vw) !important;
+  border: 3px solid #222f5b;
+  border-radius: 5px;
+}
+
+.task-list {
+  border: solid 1px #ccc;
+  min-height: 60px;
+  min-width: 300px;
+  background: #222f5b;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
+
+.task-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: #222f5b;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 18px;
+  text-align: left;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.placeholder {
+  border: dotted 3px #222f5b;
+  min-height: 60px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.box {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 10px;
+}
+
+.task-blue {
+  color: #222f5b;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.wider-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.gray-background {
+  background-color: #bebebe;
+  border: 3px solid #222f5b;
+  border-radius: 5px;
+}
+
+.deleteIcon {
+  color: #946b2d;
+}
+
+.small {
+  font-size: 0.9rem;
+}
+
+.total {
+  font-size: 1rem;
+  color: #222f5b;
+}

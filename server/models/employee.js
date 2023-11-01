@@ -15,7 +15,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let itemSchema = new Schema({
-  taskId: { type: Number, required: true },
+  taskId: { type: Number, required: false },
   taskDescription: { type: String, required: true },
 });
 

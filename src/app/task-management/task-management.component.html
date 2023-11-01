@@ -8,4 +8,158 @@
  * Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
  */
  -->
-<p>task-management works!</p>
+
+<div class="container">
+  <!-- Display error message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Display success message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <div class="row">
+    <div class="text-center">
+      <!-- Display the employee's name and 'Tasks' -->
+      <h2 class="task-blue pb-4">{{ empName }}'s Tasks</h2>
+    </div>
+
+    <!--Task Input Form -->
+    <div class="row justify-content-center pt-3">
+      <div class="col-md-6 pb-4">
+        <form [formGroup]="todoForm" (ngSubmit)="addTask()">
+          <div class="input-container">
+            <!-- Input field for entering a new task -->
+            <mat-form-field appearance="outline" class="wider-input">
+              <mat-label>Enter a new task</mat-label>
+              <input formControlName="item" matInput #taskInput />
+            </mat-form-field>
+            <!-- Button to add a new task -->
+            <button
+              mat-raised-button
+              type="submit"
+              [disabled]="todoForm.invalid"
+              color="accent"
+              class="btn btn-lg btn-primary"
+            >
+              <mat-icon> add_circle </mat-icon>
+              Add
+            </button>
+          </div>
+        </form>
+        <div>
+          <!-- Validation Error Message for empty input. -->
+          <div
+            class="alert alert-danger"
+            *ngIf="
+              todoForm.controls['item'].hasError('required') &&
+              todoForm.controls['item'].touched
+            "
+          >
+            The task field required.
+          </div>
+
+          <!-- Display error message if the task field exceeds 64 characters -->
+          <div
+            class="alert alert-danger"
+            *ngIf="
+              todoForm.controls['item'].hasError('maxlength') &&
+              todoForm.controls['item'].touched
+            "
+          >
+            The task field must be less than 65 characters in length
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid mb-5 gray-background">
+      <div cdkDropListGroup>
+        <div class="row">
+          <!--To Do Tasks Column -->
+          <div class="col-md-6 pb-5">
+            <h2 class="task-heading">To Do</h2>
+
+            <div
+              cdkDropList
+              [cdkDropListData]="tasks"
+              class="task-list"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <!-- Task items in 'To Do' column -->
+              <div
+                class="task-box"
+                *ngFor="let task of tasks; let i = index"
+                cdkDrag
+              >
+                <div class="placeholder" *cdkDragPlaceholder></div>
+                {{ task.taskDescription }}
+                <!-- Delete button for the task -->
+                <div class="box">
+                  <button
+                    mat-icon-button
+                    class="deleteIcon"
+                    (click)="deleteTask(i)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <!-- Display the total number of 'To Do' tasks -->
+              <h2>
+                <span class="total" *ngIf="tasks.length > 0">
+                  Total: {{ tasks.length }}</span
+                >
+              </h2>
+            </div>
+          </div>
+
+          <!-- Done Tasks Column -->
+          <div class="col-md-6 pb-5">
+            <div>
+              <h2 class="task-heading">Done</h2>
+              <!-- Drag-and-drop list for 'Done' tasks -->
+              <div
+                cdkDropList
+                [cdkDropListData]="done"
+                class="task-list"
+                (cdkDropListDropped)="drop($event)"
+              >
+                <!-- Task items in 'Done' column -->
+                <div
+                  class="task-box"
+                  *ngFor="let task of done; let i = index"
+                  cdkDrag
+                >
+                  <div class="placeholder" *cdkDragPlaceholder></div>
+                  {{ task.taskDescription }}
+                  <div class="box">
+                    <!-- Delete button for the completed task -->
+                    <button
+                      mat-icon-button
+                      class="deleteIcon"
+                      (click)="deleteDoneTask(i)"
+                    >
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2>
+                <span class="total" *ngIf="done.length > 0">
+                  Total: {{ done.length }}</span
+                >
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
