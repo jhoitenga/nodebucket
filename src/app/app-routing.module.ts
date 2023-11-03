@@ -48,6 +48,7 @@ const routes: Routes = [
       {
         path: 'task-management', // Child route for task management.
         component: TaskManagementComponent,
+        title: 'Nodebucket: Task Management',
         canActivate: [SignInGuard],
       },
     ],

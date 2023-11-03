@@ -47,8 +47,7 @@ const options = {
     info: {
       title: "Nodebucket RESTful APIs",
       version: "1.0.0",
-      description:
-        "Nodebucket OpenAPI Documentation: Nodebucket empowers you to efficiently oversee your tasks, ensuring you maintain command over your projects, establish priorities, and monitor progress with ease.",
+      description: "Nodebucket OpenAPI Documentation",
     },
   },
   apis: ["./server/routes/employee-routes.js"], // Specify the API routes to document.
