@@ -52,4 +52,21 @@ export class TaskService {
     // Send an HTTP POST request to add a new task.
     return this.http.post<any>(url, task);
   }
+
+  // Update an existing task for a specific employee identified by empId.
+  updateTask(
+    empId: number,
+    task: { taskId: number; status: string }
+  ): Observable<any> {
+    const url = `${this.baseUrl}/api/employees/${empId}/tasks/`;
+    console.log(empId, task.taskId, task.status);
+    return this.http.put<any>(url, task);
+  }
+
+  // Delete an existing task for a specific employee identified by empId.
+  deleteTask(empId: number, taskId: number): Observable<any> {
+    const url = `${this.baseUrl}/api/employees/${empId}/tasks/${taskId}`;
+    //console.log('Making DELETE request to:', url);
+    return this.http.delete<any>(url);
+  }
 }

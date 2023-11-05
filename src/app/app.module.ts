@@ -37,6 +37,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     TaskManagementComponent,
     AboutComponent,
     ContactComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

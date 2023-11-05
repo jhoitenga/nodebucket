@@ -18,6 +18,7 @@ import { TaskManagementComponent } from './task-management/task-management.compo
 import { SignInGuard } from './sign-in.guard';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 // routes array with a path, component, and title for each route in the application (e.g. home, about, contact, etc.)
 const routes: Routes = [
@@ -46,6 +47,11 @@ const routes: Routes = [
         title: 'Nodebucket: Contact',
       },
       {
+        path: 'not-found',
+        component: NotFoundComponent, // Route for displaying "Not Found" page.
+        title: 'NodeBucket: Not Found',
+      },
+      {
         path: 'task-management', // Child route for task management.
         component: TaskManagementComponent,
         title: 'Nodebucket: Task Management',
@@ -58,6 +64,10 @@ const routes: Routes = [
     path: 'security',
     loadChildren: () =>
       import('./security/security.module').then((m) => m.SecurityModule),
+  },
+  {
+    path: '**', // This will catch all other routes.
+    redirectTo: 'not-found', // Redirect to the 'not-found' route in the session layout.
   },
 ];
 

@@ -31,6 +31,7 @@ import {
 import { CookieService } from 'ngx-cookie-service';
 import { TaskService } from './task-management.service';
 import { ITask } from './../model/task';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-task-management',
@@ -50,11 +51,21 @@ export class TaskManagementComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     private taskService: TaskService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
   ) {
     // Initialize properties and retrieve values from cookies.
     this.empId = parseInt(this.cookieService.get('session_user') || '1', 10);
     this.empName = this.cookieService.get('fullName');
+  }
+
+  // Function to display a snackbar.
+  showSnackBar(message: string, action: string, duration: number) {
+    this.snackBar.open(message, action, {
+      duration: duration,
+      verticalPosition: 'top', // To display snackbar at the top of the screen
+      panelClass: 'app-notification-success',
+    });
   }
 
   ngOnInit(): void {
@@ -100,6 +111,7 @@ export class TaskManagementComponent implements OnInit {
       // Use the taskService to add the task for the current employee (empId)
       this.taskService.addTask(this.empId, task).subscribe({
         next: (response) => {
+          this.showSnackBar('Task has been created', '', 5000); // Snackbar to display success message
           //console.log('Task created:', response.task);
           // Push the newly created task to the 'tasks' array.
           this.tasks.push(response.task);
@@ -117,17 +129,43 @@ export class TaskManagementComponent implements OnInit {
     }
   }
 
-  // Method to delete a task from 'todo'.
-  deleteTask(i: number): void {
-    if (confirm('Are you sure you want to delete this task?')) {
-      this.tasks.splice(i, 1);
-    }
+  // Method to update task status.
+  updateTaskStatus(empId: number, taskId: number, status: string) {
+    const taskUpdateInfo = {
+      taskId,
+      status,
+    };
+    this.taskService.updateTask(empId, taskUpdateInfo).subscribe({
+      next: (res) => {
+        this.showSnackBar('Task has been updated', '', 5000); // Snackbar to display success message
+        //console.log(res);
+      },
+      error: (err) => {
+        //console.log(err.message);
+        this.errorMessage =
+          'Failed to update task status. Please try again later.';
+      },
+    });
   }
 
   // Method to delete a task from 'done'.
-  deleteDoneTask(i: number): void {
+  deleteTasks(taskId: number | undefined): void {
+    this.showSnackBar('Task has been deleted', '', 5000); // Snackbar to display success message
+    //console.log('deleteDoneTask called with taskId:', taskId);
+    if (taskId === undefined) {
+      return;
+    }
     if (confirm('Are you sure you want to delete this task?')) {
-      this.done.splice(i, 1);
+      this.taskService.deleteTask(this.empId, taskId).subscribe({
+        next: (res) => {
+          this.done = this.done.filter((task) => task.taskId !== taskId);
+          this.tasks = this.tasks.filter((task) => task.taskId !== taskId);
+          //console.log('Task successfully deleted');
+        },
+        error: (err) => {
+          //console.error(err.message);
+        },
+      });
     }
   }
 
@@ -139,6 +177,7 @@ export class TaskManagementComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      console.log('Tasks Reordered');
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -146,6 +185,15 @@ export class TaskManagementComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+
+      const task: ITask = event.container.data[event.currentIndex];
+      const status = event.container.id === 'todo' ? 'todo' : 'done';
+
+      if (task.taskId !== undefined) {
+        this.updateTaskStatus(this.empId, task.taskId, status);
+      } else {
+        console.error('Task ID is undefined. Cannot update task status.');
+      }
     }
   }
 }

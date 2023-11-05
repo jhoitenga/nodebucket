@@ -1,0 +1,50 @@
+.about-info {
+  font-weight: 500;
+  color: #222f5b;
+}
+
+.about-blue {
+  color: #222f5b;
+  line-height: 1.5;
+  font-size: 1.25rem;
+}
+
+.quote {
+  font-style: italic;
+  color: #946b2d;
+  line-height: 1.6;
+}
+
+ul.custom-bullet {
+  list-style-type: none;
+  padding-left: 0;
+}
+ul.custom-bullet li {
+  position: relative;
+}
+ul.custom-bullet li .bi {
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%) scale(1.5);
+  padding-left: 25px;
+  color: #946b2d;
+  font-size: 2rem;
+  text-align: center;
+}
+ul.custom-bullet li .bi::before {
+  vertical-align: middle;
+}
+
+.feature {
+  padding-left: 55px;
+  color: #222f5b;
+}
+
+a {
+  color: #946b2d;
+}
+
+a:hover {
+  color: #222f5b;
+}

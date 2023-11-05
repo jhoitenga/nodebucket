@@ -30,21 +30,19 @@
     <div class="row justify-content-center pt-3">
       <div class="col-md-6 pb-4">
         <form [formGroup]="todoForm" (ngSubmit)="addTask()">
-          <div class="input-container">
-            <!-- Input field for entering a new task -->
-            <mat-form-field appearance="outline" class="wider-input">
-              <mat-label>Enter a new task</mat-label>
-              <input formControlName="item" matInput #taskInput />
-            </mat-form-field>
-            <!-- Button to add a new task -->
+          <div class="input-group pb-4">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="item"
+              placeholder="Enter a new task"
+            />
             <button
-              mat-raised-button
+              class="btn btn-mod btn-border btn-circle btn-large"
               type="submit"
               [disabled]="todoForm.invalid"
-              color="accent"
-              class="btn btn-lg btn-primary"
             >
-              <mat-icon> add_circle </mat-icon>
+              <i class="bi bi-plus-circle"></i>
               Add
             </button>
           </div>
@@ -84,16 +82,13 @@
 
             <div
               cdkDropList
+              id="todo"
               [cdkDropListData]="tasks"
               class="task-list"
               (cdkDropListDropped)="drop($event)"
             >
               <!-- Task items in 'To Do' column -->
-              <div
-                class="task-box"
-                *ngFor="let task of tasks; let i = index"
-                cdkDrag
-              >
+              <div class="task-box" *ngFor="let task of tasks" cdkDrag>
                 <div class="placeholder" *cdkDragPlaceholder></div>
                 {{ task.taskDescription }}
                 <!-- Delete button for the task -->
@@ -101,7 +96,7 @@
                   <button
                     mat-icon-button
                     class="deleteIcon"
-                    (click)="deleteTask(i)"
+                    (click)="deleteTasks(task.taskId)"
                   >
                     <mat-icon>delete</mat-icon>
                   </button>
@@ -125,16 +120,13 @@
               <!-- Drag-and-drop list for 'Done' tasks -->
               <div
                 cdkDropList
+                id="done"
                 [cdkDropListData]="done"
                 class="task-list"
                 (cdkDropListDropped)="drop($event)"
               >
                 <!-- Task items in 'Done' column -->
-                <div
-                  class="task-box"
-                  *ngFor="let task of done; let i = index"
-                  cdkDrag
-                >
+                <div class="task-box" *ngFor="let task of done" cdkDrag>
                   <div class="placeholder" *cdkDragPlaceholder></div>
                   {{ task.taskDescription }}
                   <div class="box">
@@ -142,7 +134,7 @@
                     <button
                       mat-icon-button
                       class="deleteIcon"
-                      (click)="deleteDoneTask(i)"
+                      (click)="deleteTasks(task.taskId)"
                     >
                       <mat-icon>delete</mat-icon>
                     </button>

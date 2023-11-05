@@ -268,5 +268,180 @@ router.post("/employees/:empId/tasks", async (req, res) => {
   }
 });
 
+/************************************************************************************** */
+
+//  API for updating a task for an employee in MongoDB.
+/**
+ * updateTask
+ * @openapi
+ * /api/employees/{empId}/tasks:
+ *   put:
+ *     tags:
+ *       - Employees
+ *     name: updateTask
+ *     description:  API for updating a task for an employee in MongoDB.
+ *     summary: Updates a task by empId.
+ *     parameters:
+ *       - name: empId
+ *         in: path
+ *         required: true
+ *         description: Enter a valid Employee ID between 1007-1012
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - taskId
+ *               - status
+ *             properties:
+ *               taskId:
+ *                 type: number
+ *               status:
+ *                 type: string
+ *                 enum:
+ *                   - todo
+ *                   - done
+ *     responses:
+ *       '204':
+ *         description: No Content
+ *       '400':
+ *         description: Bad Request
+ *       '404':
+ *         description: Not Found
+ *       '500':
+ *         description: Internal Server Error
+ */
+
+// Define a route handler for PUT requests to update an employee's task.
+router.put("/employees/:empId/tasks", async (req, res) => {
+  try {
+    const { empId } = req.params;
+    const { taskId, status } = req.body;
+
+    // Validate status of task.
+    if (!["todo", "done"].includes(status)) {
+      // If status is invalid, return a 400 Bad Request response with an error message.
+      return res.status(400).send({ message: "Invalid status value" });
+    }
+
+    // Find the employee in the database based on empId.
+    const employee = await Employee.findOne({ empId: empId });
+
+    // If Employee not found, return a 404 Not Found response with an error message.
+    if (!employee) {
+      return res.status(404).send({ message: "Employee not found" });
+    }
+
+    // Search both 'todo' and 'done' arrays for the task.
+    let task = employee.todo.find((t) => t.taskId === taskId);
+    let taskArrayName = "todo";
+    if (!task) {
+      task = employee.done.find((t) => t.taskId === taskId);
+      taskArrayName = "done";
+    }
+
+    // If the task wasn't found in either array, send a 404 Not Found response.
+    if (!task) {
+      return res.status(404).send({ message: "Task not found" });
+    }
+
+    // Remove the task from the current array.
+    employee[taskArrayName] = employee[taskArrayName].filter(
+      (t) => t.taskId !== taskId
+    );
+
+    // If the status is 'done', add to the 'done' array; if 'todo', add to the 'todo' array.
+    if (status === "done") {
+      employee.done.push(task);
+    } else {
+      employee.todo.push(task);
+    }
+
+    // Save the updated employee.
+    await employee.save();
+
+    // Return a 204 No Content message.
+    res.status(204).send({ message: "Task updated successfully" });
+    //console.log("Task updated successfully");
+    //console.log(employee);
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({ message: `Server Error: ${e.message}` });
+  }
+});
+
+/************************************************************************************** */
+
+//  API for deleting a task for an employee in MongoDB.
+/**
+ * deleteTask
+ * @openapi
+ * /api/employees/{empId}/tasks/{taskId}:
+ *   delete:
+ *     tags:
+ *       - Employees
+ *     name: deleteTask
+ *     description:  API for deleting a task for an employee in MongoDB.
+ *     summary: Deletes a task by empId.
+ *     parameters:
+ *       - name: empId
+ *         in: path
+ *         required: true
+ *         description: Enter a valid Employee ID between 1007-1012
+ *         schema:
+ *           type: string
+ *       - name: taskId
+ *         in: path
+ *         required: true
+ *         description: Enter the ID of the task to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '204':
+ *         description: No Content
+ *       '400':
+ *         description: Bad Request
+ *       '404':
+ *         description: Not Found
+ *       '500':
+ *         description: Internal Server Error
+ */
+
+// Define a route handler for DELETE requests to delete an employee's task.
+router.delete("/employees/:empId/tasks/:taskId", async (req, res) => {
+  try {
+    const { empId, taskId } = req.params;
+
+    if (!empId || !taskId) {
+      return res
+        .status(400)
+        .send({ message: "Emp ID and Task ID are required" });
+    }
+
+    const employee = await Employee.findOneAndUpdate(
+      { empId: empId },
+      { $pull: { todo: { taskId: taskId }, done: { taskId: taskId } } },
+      { new: true } // Return the updated document
+    );
+
+    // If Employee not found, return a 404 Not Found response with an error message.
+    if (!employee) {
+      return res.status(404).send({ message: "Employee not found" });
+    }
+
+    // Return a 204 No Content message.
+    res.status(204).send({ message: "Task deleted successfully" });
+    console.log("Task deleted successfully");
+    console.log(employee);
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({ message: `Server Error: ${e.message}` });
+  }
+});
+
 // Export the router module for use in other parts of the application.
 module.exports = router;
