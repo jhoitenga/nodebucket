@@ -1,0 +1,19 @@
+<!--
+ * Title: confirmation-dialog.component.html
+ * Author: Jennifer Hoitenga
+ * Date: 11/1/2023
+ * Sources:
+ * Nodebucket Starter Project: https://github.com/buwebdev/web-450/tree/master/starter-projects/nodebucket
+ * Mat Dialog: https://material.angular.io/components/dialog/overview
+ */
+-->
+
+<!-- Dialog box for confirmation of deleting task. -->
+<h2 mat-dialog-title>Confirm Task Deletion</h2>
+<mat-dialog-content
+  >Are you sure you want to delete this task?</mat-dialog-content
+>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-button color="warn" [mat-dialog-close]="true">Delete</button>
+</mat-dialog-actions>

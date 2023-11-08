@@ -53,7 +53,8 @@
             class="alert alert-danger"
             *ngIf="
               todoForm.controls['item'].hasError('required') &&
-              todoForm.controls['item'].touched
+              todoForm.controls['item'].touched &&
+              !todoForm.controls['item'].pristine
             "
           >
             The task field required.

@@ -28,6 +28,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { TaskService } from './task-management.service';
 import { ITask } from './../model/task';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-task-management',
@@ -48,7 +50,8 @@ export class TaskManagementComponent implements OnInit {
     private cookieService: CookieService,
     private taskService: TaskService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     // Initialize properties and retrieve values from cookies.
     this.empId = parseInt(this.cookieService.get('session_user') || '1', 10);
@@ -146,23 +149,30 @@ export class TaskManagementComponent implements OnInit {
 
   // Method to delete a task from 'done'.
   deleteTasks(taskId: number | undefined): void {
-    this.showSnackBar('Task has been deleted', '', 5000); // Snackbar to display success message
     //console.log('deleteDoneTask called with taskId:', taskId);
     if (taskId === undefined) {
       return;
     }
-    if (confirm('Are you sure you want to delete this task?')) {
-      this.taskService.deleteTask(this.empId, taskId).subscribe({
-        next: (res) => {
-          this.done = this.done.filter((task) => task.taskId !== taskId);
-          this.tasks = this.tasks.filter((task) => task.taskId !== taskId);
-          //console.log('Task successfully deleted');
-        },
-        error: (err) => {
-          //console.error(err.message);
-        },
-      });
-    }
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.taskService.deleteTask(this.empId, taskId).subscribe({
+          next: (res) => {
+            this.done = this.done.filter((task) => task.taskId !== taskId);
+            this.tasks = this.tasks.filter((task) => task.taskId !== taskId);
+            this.showSnackBar('Task has been deleted', '', 5000);
+            //console.log('Task successfully deleted');
+          },
+          error: (err) => {
+            //console.error(err.message);
+            this.errorMessage =
+              'Failed to delete task. Please try again later.';
+          },
+        });
+      }
+    });
   }
 
   // Method to handle task dragging and dropping between lists.
