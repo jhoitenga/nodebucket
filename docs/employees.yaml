@@ -1,0 +1,168 @@
+# Title: employees.yaml
+# Author: Jennifer Hoitenga
+# Date: 11/8/2023
+# Description: Describing the Employee API
+# Sources Used:
+# Swagger API Editor: https://editor-next.swagger.io/
+
+openapi: 3.0.0
+info:
+  title: Nodebucket RESTful APIs
+  description: |-
+    Nodebucket OpenAPI Documentation
+
+     Some useful links:
+    - [The Nodebucket repository](https://github.com/jhoitenga/nodebucket)
+  version: 1.0.0
+servers:
+  - url: localhost:3000/api
+paths:
+  /api/employees/{empId}:
+    get:
+      tags:
+        - Employees
+      summary: Returns an Employee document by empId.
+      description: API for returning an Employee from MongoDB.
+      parameters:
+        - name: empId
+          in: path
+          description: Enter a valid Employee ID between 1007-1012
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+
+  /api/employees/{empId}/tasks:
+    get:
+      tags:
+        - Employees
+      summary: Returns all tasks by empId.
+      description: API for returning all tasks for an employee from MongoDB.
+      parameters:
+        - name: empId
+          in: path
+          description: Enter a valid Employee ID between 1007-1012
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+    post:
+      tags:
+        - Employees
+      summary: Creates a task by empId.
+      description: API for creating a task for an employee in MongoDB.
+      parameters:
+        - name: empId
+          in: path
+          description: Enter a valid Employee ID between 1007-1012
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - taskDescription
+                - status
+              properites:
+                taskDescription:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                    - todo
+                    - done
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+    put:
+      tags:
+        - Employees
+      summary: Updates a task by empId.
+      description: API for updating a task for an employee in MongoDB.
+      parameters:
+        - name: empId
+          in: path
+          description: Enter a valid Employee ID between 1007-1012
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - taskId
+                - status
+              properites:
+                taskId:
+                  type: number
+                status:
+                  type: string
+                  enum:
+                    - todo
+                    - done
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+  /api/employees/{empId}/tasks/{taskId}:
+    delete:
+      tags:
+        - Employees
+      summary: Deletes a task by empId.
+      description: API for deleting a task for an employee in MongoDB.
+      parameters:
+        - name: empId
+          in: path
+          description: Enter a valid Employee ID between 1007-1012
+          required: true
+          schema:
+            type: string
+        - name: taskId
+          in: path
+          required: true
+          description: Enter the ID of the task to delete
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error

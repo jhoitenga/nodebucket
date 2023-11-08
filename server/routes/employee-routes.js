@@ -367,7 +367,7 @@ router.put("/employees/:empId/tasks", async (req, res) => {
     // Return a 204 No Content message.
     res.status(204).send({ message: "Task updated successfully" });
     //console.log("Task updated successfully");
-    //console.log(employee);
+    console.log(employee);
   } catch (e) {
     console.error(e);
     res.status(500).send({ message: `Server Error: ${e.message}` });

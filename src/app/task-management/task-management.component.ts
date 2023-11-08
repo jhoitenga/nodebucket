@@ -9,7 +9,6 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { NgIf } from '@angular/common';
 import {
   FormsModule,
   FormBuilder,
@@ -17,9 +16,6 @@ import {
   Form,
   FormGroup,
 } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { NgFor } from '@angular/common';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -171,19 +167,29 @@ export class TaskManagementComponent implements OnInit {
 
   // Method to handle task dragging and dropping between lists.
   drop(event: CdkDragDrop<ITask[]>) {
+    const task: ITask = event.container.data[event.currentIndex];
+    const status = event.container.id === 'todo' ? 'todo' : 'done';
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
-      console.log('Tasks Reordered');
+      console.log('Moved item in array', event.container.data);
+      if (task.taskId !== undefined) {
+        this.updateTaskStatus(this.empId, task.taskId, status);
+      } else {
+        console.error('Task ID is undefined. Cannot update task status.');
+      }
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
+      );
+      console.log(
+        `Item moved from one list to another from ${event.previousIndex} to ${event.currentIndex}`
       );
 
       const task: ITask = event.container.data[event.currentIndex];
