@@ -19,7 +19,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class SignInService {
   employeeIds: Array<number>; // Array to store valid employee IDs.
-  private baseUrl: string = 'http://localhost:3000/api'; // Base URL for API requests.
+  private baseUrl: string = '/api'; // Base URL for API requests using relative URL.
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
     // Initialize the array of valid employee IDs.

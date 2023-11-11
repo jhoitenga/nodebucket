@@ -34,11 +34,11 @@ export class TaskService {
   }
 
   // Define the base URL for the API.
-  private baseUrl: string = 'http://localhost:3000';
+  //private baseUrl: string = 'http://localhost:3000';  // Changing to relative URLs
 
   // Retrieve tasks for a specific employee by their empId.
   getTasks(empId: number): Observable<ITask[]> {
-    const url = `${this.baseUrl}/api/employees/${empId}/tasks`;
+    const url = `/api/employees/${empId}/tasks`;
     // Send an HTTP GET request to retrieve tasks and handle any errors.
     return this.http.get<ITask[]>(url).pipe(catchError(this.handleError));
   }
@@ -48,7 +48,7 @@ export class TaskService {
     empId: number,
     task: { taskDescription: string; status: string }
   ): Observable<any> {
-    const url = `${this.baseUrl}/api/employees/${empId}/tasks`;
+    const url = `/api/employees/${empId}/tasks`;
     // Send an HTTP POST request to add a new task.
     return this.http.post<any>(url, task);
   }
@@ -58,14 +58,14 @@ export class TaskService {
     empId: number,
     task: { taskId: number; status: string }
   ): Observable<any> {
-    const url = `${this.baseUrl}/api/employees/${empId}/tasks/`;
+    const url = `/api/employees/${empId}/tasks/`;
     //console.log(empId, task.taskId, task.status);
     return this.http.put<any>(url, task);
   }
 
   // Delete an existing task for a specific employee identified by empId.
   deleteTask(empId: number, taskId: number): Observable<any> {
-    const url = `${this.baseUrl}/api/employees/${empId}/tasks/${taskId}`;
+    const url = `/api/employees/${empId}/tasks/${taskId}`;
     //console.log('Making DELETE request to:', url);
     return this.http.delete<any>(url);
   }
