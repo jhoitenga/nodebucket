@@ -7,3 +7,7 @@
  * Previous repositories from my personal GitHub: https://github.com/jhoitenga?tab=repositories
  * Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
  */
+
+a {
+  text-decoration: none;
+}

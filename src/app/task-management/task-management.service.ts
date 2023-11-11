@@ -59,7 +59,7 @@ export class TaskService {
     task: { taskId: number; status: string }
   ): Observable<any> {
     const url = `${this.baseUrl}/api/employees/${empId}/tasks/`;
-    console.log(empId, task.taskId, task.status);
+    //console.log(empId, task.taskId, task.status);
     return this.http.put<any>(url, task);
   }
 

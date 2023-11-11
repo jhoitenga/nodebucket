@@ -39,7 +39,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
-import { ChangeDetectorRef } from '@angular/core';
 
 @NgModule({
   declarations: [

@@ -47,7 +47,8 @@ const options = {
     info: {
       title: "Nodebucket RESTful APIs",
       version: "1.0.0",
-      description: "Nodebucket OpenAPI Documentation",
+      description:
+        "Nodebucket OpenAPI Documentation\n\nUseful links:\n\n[Nodebucket repository](https://github.com/jhoitenga/nodebucket)\n\n[Nodebucket Swagger documentation](https://github.com/jhoitenga/nodebucket/blob/main/docs/employees_swagger.json)\n\n[Nodebucket YAML documentation](https://github.com/jhoitenga/nodebucket/blob/main/docs/employees.yaml)",
     },
   },
   apis: ["./server/routes/employee-routes.js"], // Specify the API routes to document.

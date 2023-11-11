@@ -185,7 +185,7 @@ export class TaskManagementComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      console.log('Moved item in array', event.container.data);
+      //console.log('Moved item in array', event.container.data);
       if (task.taskId !== undefined) {
         this.updateTaskStatus(this.empId, task.taskId, status);
       } else {
@@ -198,9 +198,7 @@ export class TaskManagementComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      console.log(
-        `Item moved from one list to another from ${event.previousIndex} to ${event.currentIndex}`
-      );
+      //console.log(`Item moved from one list to another from ${event.previousIndex} to ${event.currentIndex}`);
 
       const task: ITask = event.container.data[event.currentIndex];
       const status = event.container.id === 'todo' ? 'todo' : 'done';
